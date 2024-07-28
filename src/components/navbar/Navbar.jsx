@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
+import { useSelector } from "react-redux";
 
 
 const Navbar = () => {
@@ -15,9 +16,12 @@ const Navbar = () => {
         navigate("/login")
     }
 
+    // CartItems
+    const cartItems = useSelector((state) => state.cart);
+
     // navList Data
     const navList = (
-        <ul className="flex space-x-3 text-white font-medium text-md px-5 ">
+        <ul className="flex space-x-8 text-white font-medium text-md px-5 ">
             {/* Home */}
             <li>
                 <Link to={'/'}>Home</Link>
@@ -25,7 +29,7 @@ const Navbar = () => {
 
             {/* All Product */}
             <li>
-                <Link to={'/allproduct'}>All Product</Link>
+                <Link to={'/allproduct'}>All Products</Link>
             </li>
 
             {/* Signup */}
@@ -40,12 +44,12 @@ const Navbar = () => {
 
             {/* User */}
             {user?.role === "user" && <li>
-                <Link to={'/user-dashboard'}>User</Link>
+                <Link to={'/user-dashboard'}>User Profile</Link>
             </li>}
 
             {/* Admin */}
             {user?.role === "admin" && <li>
-                <Link to={'/admin-dashboard'}>Admin</Link>
+                <Link to={'/admin-dashboard'}>Admin Profile</Link>
             </li>}
 
             {/* logout */}
@@ -56,7 +60,7 @@ const Navbar = () => {
             {/* Cart */}
             <li>
                 <Link to={'/cart'}>
-                    Cart(0)
+                    Cart({cartItems.length})
                 </Link>
             </li>
         </ul>
@@ -68,7 +72,7 @@ const Navbar = () => {
                 {/* left  */}
                 <div className="left py-3 lg:py-0">
                     <Link to={'/'}>
-                        <h2 className=" font-bold text-white text-2xl text-center">E-Bharat</h2>
+                        <h2 className=" font-bold text-white text-2xl text-center">NexStore</h2>
                     </Link>
                 </div>
 
